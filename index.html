@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Голосування за улюблені смайлики</h1>
+
+    <ul id="smiley-list">
+      <li>
+        <span>😊</span>
+        <button class="vote-button" data-smiley="😊">Голосувати</button>
+        <span class="vote-count">0</span>
+      </li>
+      <li>
+        <span>😍</span>
+        <button class="vote-button" data-smiley="😍">Голосувати</button>
+        <span class="vote-count">0</span>
+      </li>
+      <!-- Додайте інші смайлики, які ви хочете включити до голосування -->
+    </ul>
+  
+    <button id="show-results-button">Показати результати</button>
+    <div id="result"></div>
+  
+    <script>
+      const voteButtons = document.querySelectorAll('.vote-button');
+      const voteCounts = document.querySelectorAll('.vote-count');
+      const showResultsButton = document.getElementById('show-results-button');
+      const resultDiv = document.getElementById('result');
+  
+      voteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const smiley = button.getAttribute('data-smiley');
+          const index = Array.from(voteButtons).indexOf(button);
+          voteCounts[index].textContent = parseInt(voteCounts[index].textContent) + 1;
+        });
+      });
+  
+      showResultsButton.addEventListener('click', () => {
+        const counts = Array.from(voteCounts).map(count => parseInt(count.textContent));
+        const maxVotes = Math.max(...counts);
+        const winningIndex = counts.indexOf(maxVotes);
+        const winningSmiley = voteButtons[winningIndex].getAttribute('data-smiley');
+        resultDiv.textContent = `Смайлик, що переміг: ${winningSmiley}`;
+      });
+    </script>
+  
+
+   
+</body>
+</html>
+  
